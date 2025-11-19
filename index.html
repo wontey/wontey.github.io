@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ODAYUN - Illustrator Portfolio</title>
+    <style>
+        /* ===== 기본 스타일 리셋 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ===== 다크 모드 색상 변수 ===== */
+        :root {
+            --bg-primary: #1A1A1A;
+            --bg-secondary: #2D2D2D;
+            --accent: #6366F1;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+        }
+
+        /* ===== 기본 폰트 및 배경 ===== */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== 컨테이너 ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== 섹션 공통 스타일 ===== */
+        section {
+            padding: 80px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--accent);
+            text-align: center;
+        }
+
+        /* ===== 히어로 섹션 ===== */
+        .hero {
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 1.4s ease;
+        }
+
+        /* ===== About Me 섹션 ===== */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-image:hover {
+            transform: scale(1.1);
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.5);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        /* ===== Skills 섹션 ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-card {
+            background: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-card:hover {
+            transform: scale(1.15);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
+        }
+
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .skill-card p {
+            color: var(--text-secondary);
+        }
+
+        /* ===== Projects 섹션 ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.6);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .project-info p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* ===== Contact 섹션 ===== */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            font-weight: bold;
+        }
+
+        .contact-link:hover {
+            transform: scale(1.15);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
+            background: var(--accent);
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            background: var(--bg-secondary);
+            padding: 30px 0;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--text-primary);
+        }
+
+        /* ===== 애니메이션 ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== 반응형 디자인 (모바일) ===== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 60px 0;
+                min-height: auto;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-image {
+                margin: 0 auto;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* ===== 스크롤 부드럽게 ===== */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ===== 스크롤바 스타일링 (다크 모드) ===== */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7C7FF1;
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== 히어로 섹션 ===== -->
+    <section class="hero">
+        <div class="container">
+            <h1>오다윤</h1>
+            <div class="subtitle">ODAYUN</div>
+            <p class="subtitle">Illustrator</p>
+            <p>다양한 분야와 그림을 엮어 도전하는 것을 좋아하는 일러스트레이터 입니다.</p>
+        </div>
+    </section>
+
+    <!-- ===== About Me 섹션 ===== -->
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/300x400/6366F1/FFFFFF?text=ODAYUN" alt="오다윤 프로필">
+                </div>
+                <div class="about-text">
+                    <h3>안녕하세요, 일러스트레이터 오다윤입니다.</h3>
+                    <p>저는 다양한 분야와 그림을 결합하여 새로운 도전을 즐기는 일러스트레이터입니다. 단순히 그림을 그리는 것을 넘어, 스토리텔링과 감성을 담아내는 작업을 추구합니다.</p>
+                    <p>디지털과 아날로그를 넘나들며, 각 프로젝트에 맞는 최적의 표현 방식을 찾아냅니다. 클라이언트의 비전을 시각적으로 구현하고, 보는 이들에게 감동을 전달하는 것이 저의 목표입니다.</p>
+                    <p>끊임없이 배우고 성장하며, 창의적인 작업을 통해 세상과 소통하고 싶습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Skills 섹션 ===== -->
+    <section id="skills">
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>🎨 디지털 일러스트</h3>
+                    <p>Photoshop, Procreate, Clip Studio를 활용한 디지털 드로잉</p>
+                </div>
+                <div class="skill-card">
+                    <h3>✏️ 캐릭터 디자인</h3>
+                    <p>개성 넘치는 캐릭터 창작 및 스토리텔링</p>
+                </div>
+                <div class="skill-card">
+                    <h3>📚 북 커버 디자인</h3>
+                    <p>책의 내용을 담은 감성적인 표지 작업</p>
+                </div>
+                <div class="skill-card">
+                    <h3>🖼️ 배경 아트</h3>
+                    <p>분위기 있는 배경 및 환경 디자인</p>
+                </div>
+                <div class="skill-card">
+                    <h3>🎭 컨셉 아트</h3>
+                    <p>게임, 애니메이션을 위한 컨셉 작업</p>
+                </div>
+                <div class="skill-card">
+                    <h3>💼 커미션 작업</h3>
+                    <p>클라이언트 맞춤형 일러스트 제작</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Projects 섹션 ===== -->
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x300/6366F1/FFFFFF?text=Fantasy+Character" alt="프로젝트 1">
+                    </div>
+                    <div class="project-info">
+                        <h3>판타지 캐릭터 시리즈</h3>
+                        <p>다양한 판타지 세계관의 캐릭터들을 디자인한 개인 프로젝트입니다. 각 캐릭터마다 고유한 스토리와 개성을 담았습니다.</p>
+                        <div class="project-tags">
+                            <span class="tag">캐릭터 디자인</span>
+                            <span class="tag">디지털 아트</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x300/6366F1/FFFFFF?text=Book+Cover" alt="프로젝트 2">
+                    </div>
+                    <div class="project-info">
+                        <h3>감성 북 커버 디자인</h3>
+                        <p>독립 출판사와 협업하여 제작한 소설 표지 작업입니다. 책의 감성과 스토리를 시각적으로 표현했습니다.</p>
+                        <div class="project-tags">
+                            <span class="tag">북 커버</span>
+                            <span class="tag">타이포그래피</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x300/6366F1/FFFFFF?text=Game+Concept" alt="프로젝트 3">
+                    </div>
+                    <div class="project-info">
+                        <h3>인디 게임 컨셉 아트</h3>
+                        <p>인디 게임 개발팀과 함께한 컨셉 아트 작업입니다. 게임의 세계관과 분위기를 설정하는 핵심 비주얼을 제작했습니다.</p>
+                        <div class="project-tags">
+                            <span class="tag">컨셉 아트</span>
+                            <span class="tag">게임 디자인</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x300/6366F1/FFFFFF?text=Landscape+Art" alt="프로젝트 4">
+                    </div>
+                    <div class="project-info">
+                        <h3>감성 풍경 일러스트</h3>
+                        <p>계절의 변화와 시간의 흐름을 담은 풍경 일러스트 시리즈입니다. 자연의 아름다움과 고요함을 표현했습니다.</p>
+                        <div class="project-tags">
+                            <span class="tag">배경 아트</span>
+                            <span class="tag">풍경화</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Contact 섹션 ===== -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact</h2>
+            <div class="contact-content">
+                <p>프로젝트 문의나 협업 제안은 언제든 환영합니다!</p>
+                <div class="contact-links">
+                    <a href="mailto:odayun@example.com" class="contact-link">📧 Email</a>
+                    <a href="https://instagram.com/odayun" target="_blank" class="contact-link">📷 Instagram</a>
+                    <a href="https://twitter.com/odayun" target="_blank" class="contact-link">🐦 Twitter</a>
+                    <a href="https://behance.net/odayun" target="_blank" class="contact-link">🎨 Behance</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer>
+        <div class="container">
+            <p>© 2025 오다윤. Powered by <a href="https://ai.triz.kr" target="_blank">AI Portfolio Workshop</a>.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== 스크롤 애니메이션 효과 =====
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // 모든 섹션에 애니메이션 적용
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // ===== 프로젝트 카드 클릭 시 확대 효과 =====
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // 간단한 알림 (실제로는 모달이나 상세 페이지로 연결 가능)
+                const projectName = this.querySelector('h3').textContent;
+                console.log(`${projectName} 클릭됨`);
+            });
+        });
+
+        // ===== 부드러운 스크롤 네비게이션 =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
